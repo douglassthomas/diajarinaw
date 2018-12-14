@@ -37,27 +37,27 @@ router.get('/authFacebook', passport.authenticate('facebook', {scope:['email']})
 router.get('/authFacebook/done', passport.authenticate('facebook', {
   failureRedirect: '/'
 }),function(req,res){
-  // return res.json(req.user);
+  return res.json(req.user);
 
-  var fbid = req.user.id;
+  // var fbid = req.user.id;
 
-  var query = "SELECT * FROM users where facebook_id=?";
-  connect.query(query, [fbid], function (err, result) {
-    console.log(result)
+  // var query = "SELECT * FROM users where facebook_id=?";
+  // connect.query(query, [fbid], function (err, result) {
+  //   console.log(result)
 
 
-    if(err){
-      res.redirect('/');
-    }
+  //   if(err){
+  //     res.redirect('/');
+  //   }
 
-    if(result.length === 0){
-      res.redirect('/register?fbID=' + fbid);
-    }
-    else{
-      res.redirect('/home?id='+result[0].id);
-    }
+  //   if(result.length === 0){
+  //     res.redirect('/register?fbID=' + fbid);
+  //   }
+  //   else{
+  //     res.redirect('/home?id='+result[0].id);
+  //   }
 
-  })
+  // })
 
 
 
