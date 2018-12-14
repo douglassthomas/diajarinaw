@@ -18,7 +18,8 @@ router.use(passport.initialize());
 passport.use(new FacebookStrategy({
   clientID : '297783757509176',
   clientSecret : 'c0bfc95253095719bdf05ef8c747377c',
-  callbackURL: 'https://aae8cdf6.ap.ngrok.io/authFacebook/done',
+  callbackURL: 'https://mccdiajarinaw.herokuapp.com/authFacebook/done',
+  enableProof: true,
   profileFields: ['id', 'name', 'email', 'photos']
 }, function(accessToken, refreshToken, profile, done){
   return done(null, profile);
@@ -32,9 +33,8 @@ passport.deserializeUser(function(profile,done){
   return done(null, profile);
 })
 
-router.get('/authFacebook', passport.authenticate('facebook'));
-router.get('/authFacebook/done', 
-passport.authenticate('facebook', {
+router.get('/authFacebook', passport.authenticate('facebook', {scope:['email']}));
+router.get('/authFacebook/done', passport.authenticate('facebook', {
   failureRedirect: '/'
 }),function(req,res){
   // return res.json(req.user);
