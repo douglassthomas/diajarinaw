@@ -37,8 +37,8 @@ router.get('/authFacebook', passport.authenticate('facebook', {scope:['email']})
 router.get('/authFacebook/done', passport.authenticate('facebook', {
   failureRedirect: '/'
 }),function(req,res){
-  return res.json(req.user);
-
+//   return res.json(req.user);
+  res.redirect('localhost:3000/signup?fbid='+req.user.id+'&name='+req.user.name)
   // var fbid = req.user.id;
 
   // var query = "SELECT * FROM users where facebook_id=?";
